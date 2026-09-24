@@ -3,7 +3,11 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from database import db, init_db
 
-STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+# Resolve the frontend directory as an absolute path relative to this file,
+# using os.path.abspath(__file__) so it works regardless of which directory
+# the server is started from.
+BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', 'frontend'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -64,7 +68,13 @@ def delete_todo(id):
 
 @app.route('/')
 def index():
-    return send_from_directory(STATIC_DIR, 'index.html')
+    return send_from_directory(FRONTEND_DIR, 'index.html')
+
+
+@app.route('/<path:filename>')
+def frontend_files(filename):
+    """Serve any file (styles.css, app.js, …) from the frontend directory."""
+    return send_from_directory(FRONTEND_DIR, filename)
 
 
 if __name__ == '__main__':
