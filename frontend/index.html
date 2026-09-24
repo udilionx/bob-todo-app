@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <h1>My Todos</h1>
+        <p class="subtitle">Stay on top of your tasks</p>
+      </header>
+
+      <!-- Add todo form -->
+      <form id="add-form" novalidate>
+        <div class="form-fields">
+          <input
+            type="text"
+            id="title-input"
+            class="input-title"
+            placeholder="What needs doing?"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="text"
+            id="description-input"
+            class="input-description"
+            placeholder="Add a description (optional)"
+            autocomplete="off"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-icon">+</span> Add Todo
+        </button>
+      </form>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+        <span class="todo-count" id="todo-count"></span>
+      </div>
+
+      <!-- Todo list -->
+      <ul id="todo-list" aria-label="Todo list"></ul>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state hidden">
+        <p>No todos here. Add one above!</p>
+      </div>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
